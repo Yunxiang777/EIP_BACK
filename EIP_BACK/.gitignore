@@ -11,6 +11,7 @@ artifacts/
 *.sln.iml
 
 # IDE settings
+../.vs/
 .vs/
 .idea/
 .vscode/
