@@ -1,0 +1,54 @@
+# Build results
+bin/
+obj/
+artifacts/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.sln.iml
+
+# IDE settings
+.vs/
+.idea/
+.vscode/
+
+# NuGet packages & config
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Logs & temp files
+*.log
+*.tmp
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Publish output
+publish/
+out/
+
+# Others
+*.dbmdl
+*.jfm
+*.pdb
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio Code settings (optional)
+*.code-workspace
+.history/
+
+# Optional: exclude secrets or app settings (if needed)
+# appsettings.Development.json

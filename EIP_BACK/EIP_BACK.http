@@ -1,0 +1,6 @@
+@EIP_BACK_HostAddress = http://localhost:5244
+
+GET {{EIP_BACK_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
