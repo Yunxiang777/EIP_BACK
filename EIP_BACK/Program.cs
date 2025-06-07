@@ -1,5 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// 僅允許指定網域
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:5173") // 請改成你的前端網址
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -17,6 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+
+// 啟用 CORS，僅允許指定網域
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 
