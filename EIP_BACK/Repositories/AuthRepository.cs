@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Oracle.ManagedDataAccess.Client;
 using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
 using EIP_BACK.Interfaces;
 
 namespace EIP_BACK.Repositories

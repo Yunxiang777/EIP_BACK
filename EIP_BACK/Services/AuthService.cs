@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using EIP_BACK.Interfaces;
 
 namespace EIP_BACK.Services
