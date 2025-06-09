@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Oracle.ManagedDataAccess.Client;
-using Microsoft.Extensions.Configuration;
 using EIP_BACK.Interfaces;
+using EIP_BACK.Entities;
 
 namespace EIP_BACK.Repositories
 {
@@ -14,24 +14,25 @@ namespace EIP_BACK.Repositories
             _configuration = configuration;
         }
 
-        public async Task<bool> ValidateUserAsync(string userId, string hashedPassword)
+        public async Task<User?> ValidateUserAsync(string userId, string hashedPassword)
         {
             string connectionString = _configuration.GetConnectionString("OracleDb");
             using var connection = new OracleConnection(connectionString);
 
-            string sql = @"SELECT COUNT(1) 
-                           FROM ACC_USER 
-                           WHERE USER_ID = :UserId 
-                             AND PASSWD = :Password 
-                             AND IS_ENABLE = 'Y'";
+            string sql = @"
+                SELECT USER_CODE, USER_ID, USER_NAME, EMAIL, MOBILE
+                FROM ACC_USER 
+                WHERE USER_ID = :UserId 
+                  AND PASSWD = :Password 
+                  AND IS_ENABLE = 'Y'";
 
-            var count = await connection.ExecuteScalarAsync<int>(sql, new
+            var user = await connection.QueryFirstOrDefaultAsync<User>(sql, new
             {
                 UserId = userId,
                 Password = hashedPassword
             });
 
-            return count > 0;
+            return user;
         }
     }
 }

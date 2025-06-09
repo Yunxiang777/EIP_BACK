@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
-
+﻿using EIP_BACK.Entities;
 namespace EIP_BACK.Interfaces
 {
     public interface IAuthRepository
     {
-        Task<bool> ValidateUserAsync(string userId, string hashedPassword);
+        Task<User?> ValidateUserAsync(string userId, string hashedPassword);
     }
 }

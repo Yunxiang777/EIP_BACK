@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using EIP_BACK.Interfaces;
 using EIP_BACK.DTOs;
+using EIP_BACK.Entities;
 
 namespace EIP_BACK.Controllers
 {
@@ -18,15 +19,25 @@ namespace EIP_BACK.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.UserId) || string.IsNullOrWhiteSpace(request.Password))
+            if (string.IsNullOrWhiteSpace(request.USER_ID) || string.IsNullOrWhiteSpace(request.PASSWD))
                 return BadRequest(new { message = "請提供帳號與密碼" });
 
-            bool isValid = await _authService.LoginAsync(request.UserId, request.Password);
+            User? user = await _authService.LoginAsync(request.USER_ID, request.PASSWD);
 
-            if (isValid)
-                return Ok(new { message = "登入成功" });
+            if (user == null)
+                return Unauthorized(new { message = "帳號或密碼錯誤，或帳號未啟用" });
 
-            return Unauthorized(new { message = "帳號或密碼錯誤，或帳號未啟用" });
+            // 登入成功回傳使用者資料
+            var response = new UserResponse
+            {
+                USER_CODE = user.USER_CODE,
+                USER_ID = user.USER_ID,
+                USER_NAME = user.USER_NAME,
+                EMAIL = user.EMAIL,
+                MOBILE = user.MOBILE
+            };
+
+            return Ok(response);
         }
     }
 }
