@@ -7,5 +7,6 @@
         public string USER_NAME { get; set; }
         public string EMAIL { get; set; }
         public string MOBILE { get; set; }
+        public DateTime CRDAT { get; set; }
     }
 }

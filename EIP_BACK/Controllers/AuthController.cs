@@ -34,7 +34,8 @@ namespace EIP_BACK.Controllers
                 USER_ID = user.USER_ID,
                 USER_NAME = user.USER_NAME,
                 EMAIL = user.EMAIL,
-                MOBILE = user.MOBILE
+                MOBILE = user.MOBILE,
+                CRDAT = user.CRDAT.ToString("yyyy¦~M¤ëd¸¹")
             };
 
             return Ok(response);

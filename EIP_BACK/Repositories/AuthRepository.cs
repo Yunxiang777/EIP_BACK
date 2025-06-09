@@ -20,7 +20,7 @@ namespace EIP_BACK.Repositories
             using var connection = new OracleConnection(connectionString);
 
             string sql = @"
-                SELECT USER_CODE, USER_ID, USER_NAME, EMAIL, MOBILE
+                SELECT USER_CODE, USER_ID, USER_NAME, EMAIL, MOBILE, CRDAT
                 FROM ACC_USER 
                 WHERE USER_ID = :UserId 
                   AND PASSWD = :Password 
