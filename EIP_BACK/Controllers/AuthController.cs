@@ -40,5 +40,26 @@ namespace EIP_BACK.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut("{userCode}")]
+        public async Task<IActionResult> UpdateUser(string userCode, [FromBody] UpdateUserRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(userCode))
+                return BadRequest(new { message = "USER_CODE 不能為空" });
+
+            var updatedUser = new User
+            {
+                USER_NAME = request.USER_NAME,
+                EMAIL = request.EMAIL,
+                MOBILE = request.MOBILE
+            };
+
+            bool result = await _authService.UpdateUserAsync(userCode, updatedUser);
+
+            if (!result)
+                return NotFound(new { message = "找不到使用者或更新失敗" });
+
+            return Ok(new { message = "更新成功" });
+        }
     }
 }

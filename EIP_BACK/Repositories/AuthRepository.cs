@@ -2,6 +2,7 @@
 using Oracle.ManagedDataAccess.Client;
 using EIP_BACK.Interfaces;
 using EIP_BACK.Entities;
+using EIP_BACK.DTOs;
 
 namespace EIP_BACK.Repositories
 {
@@ -33,6 +34,30 @@ namespace EIP_BACK.Repositories
             });
 
             return user;
+        }
+
+        public async Task<bool> UpdateUserAsync(string userCode, User updatedUser)
+        {
+            string connectionString = _configuration.GetConnectionString("OracleDb");
+            using var connection = new OracleConnection(connectionString);
+
+            string sql = @"
+                UPDATE ACC_USER
+                SET USER_NAME = :UserName,
+                    EMAIL = :Email,
+                    MOBILE = :Mobile
+                WHERE USER_CODE = :UserCode
+            ";
+
+            var affectedRows = await connection.ExecuteAsync(sql, new
+            {
+                UserName = updatedUser.USER_NAME,
+                Email = updatedUser.EMAIL,
+                Mobile = updatedUser.MOBILE,
+                UserCode = userCode
+            });
+
+            return affectedRows > 0;
         }
     }
 }
