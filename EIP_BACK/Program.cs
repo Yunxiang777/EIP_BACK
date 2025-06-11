@@ -25,6 +25,8 @@ builder.Services.AddSwaggerGen();
 // µù¥U DI¡]­ÜÀx¼Ò¦¡¡^
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IWorkTimeService, WorkTimeService>();
+builder.Services.AddScoped<IWorkTimeRepository, WorkTimeRepository>();
 
 var app = builder.Build();
 
