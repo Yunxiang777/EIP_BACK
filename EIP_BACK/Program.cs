@@ -27,6 +27,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IWorkTimeService, WorkTimeService>();
 builder.Services.AddScoped<IWorkTimeRepository, WorkTimeRepository>();
+builder.Services.AddScoped<ILeaveFormRepository, LeaveFormRepository>();
+builder.Services.AddScoped<ILeaveFormService, LeaveFormService>();
 
 var app = builder.Build();
 
